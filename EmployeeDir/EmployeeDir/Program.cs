@@ -20,6 +20,7 @@ namespace EmployeeDir
                 emps.Setup(10000);
                 while (!bored)
                 {
+                    Console.WriteLine("*var* means a variable.");
                     Console.WriteLine("Enter \"set *filepath*\" to set your employee file , or \"makedir *directorypath*\" to make folder.");
                     command = Console.ReadLine();
                     things = command.Split(" ");
@@ -40,10 +41,11 @@ namespace EmployeeDir
 
                 }
                 bored = false;
-                while (!bored)
+                Console.WriteLine("Enter \"help\" to get a list of commands or enter command below (command is the text in parentheses and *var* means a variable:");
+                Console.WriteLine("Note: For any name variable, if you just enter the last name, it will select the first name with that last name.");
+            while (!bored)
                 {
-                    Console.WriteLine("Enter \"help\" to get a list of commands or enter command below (command is the text in parentheses and *var* means a variable:");
-                    Console.WriteLine("Note: For any name variable, if you just enter the last name, it will select the first name with that last name.");
+                    
                     command = Console.ReadLine();
                     if (command.Equals("help"))
                     {
@@ -73,7 +75,6 @@ namespace EmployeeDir
                         Console.WriteLine("Ex: \"jobtitle,Junior Developer\"");
                         lone = Console.ReadLine();
                         things2 = lone.Split(",");
-
                         emps.Modify(name, things2[0], things2[1]);
                         emps.WriteFile2();
                         emps.LoadFile();
@@ -96,10 +97,7 @@ namespace EmployeeDir
                         emps.LoadFile();
                         Console.WriteLine("Employee Deleted");
                     }
-                    else if (command.StartsWith("sort"))
-                    {
-
-                    }
+                    
                 }
             }
             private string command, path, name, tomod, lone;

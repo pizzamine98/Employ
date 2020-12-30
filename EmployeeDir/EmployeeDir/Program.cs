@@ -18,28 +18,36 @@ namespace EmployeeDir
                 bored = false;
                 emps = new Employees();
                 emps.Setup(10000);
-                while (!bored)
-                {
-                    Console.WriteLine("*var* means a variable.");
-                    Console.WriteLine("Enter \"set *filepath*\" to set your employee file , or \"makedir *directorypath*\" to make folder.");
-                    command = Console.ReadLine();
-                    things = command.Split(" ");
+            while (!bored)
+            {
+                Console.WriteLine("*var* means a variable.");
+                Console.WriteLine("Enter \"set *filepath*\" to set your employee file , or \"makedir *directorypath*\" to make folder and file.");
+                command = Console.ReadLine();
+                things = command.Split(" ");
 
-                    if (things[0].Equals("set"))
+                if (things[0].Equals("set"))
+                {
+                    path = @"" + things[1];
+                    emps.SetPath(path);
+                    emps.LoadFile();
+                    bored = true;
+                }
+                else if (things[0].Equals("makedir"))
+                {
+                    path = @"" + things[1];
+                    if (!System.IO.Directory.Exists(path))
                     {
-                        path = @"" + things[1];
-                        emps.SetPath(path);
-                        emps.LoadFile();
-                        bored = true;
-                    }
-                    else if (things[0].Equals("makedir"))
-                    {
-                        path = @"" + things[1];
                         System.IO.Directory.CreateDirectory(path);
                     }
-
-
+                    path = path + "\\employees.dat";
+                    System.IO.File.WriteAllText(path, "");
+                    Console.WriteLine("New filepath: " + path);
+                    emps.SetPath(path);
+                    emps.LoadFile();
+                    bored = true;
                 }
+                
+            }
                 bored = false;
                 Console.WriteLine("Enter \"help\" to get a list of commands or enter command below (command is the text in parentheses and *var* means a variable:");
                 Console.WriteLine("Note: For any name variable, if you just enter the last name, it will select the first name with that last name.");
